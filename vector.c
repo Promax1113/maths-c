@@ -10,6 +10,18 @@ double calculate_vector(double x, double y){
     return (sqrt(pow(x, 2) + pow(y, 2)));
 }
 
+double calculate_pythagorean(){
+
+    char choice[1];
+    printf("Select letter to solve for (a, b, c): ");
+    scanf("%s", &choice);
+    const char *choices[] = {"a", "b", "c"};
+    if (strcmp(choice, choices[0]) == 0)
+    {
+        //TODO Calculation
+    }
+}
+    
 
 int main(int argc, char *argv[])
 {
@@ -21,12 +33,13 @@ int main(int argc, char *argv[])
     const char **args = (const char **)argv;
 
     const char *opt[] = {"-v", "-p"};
+
     if (strcmp(opt[0], args[mode_arg]) == 0)
     {
         printf("Vector magnitude is: %f", calculate_vector(atof(argv[x_arg]), atof(argv[y_arg])));
     }
     else if(strcmp(opt[1], args[mode_arg]) == 0){
-        // Make pythagorean theorem funct
+        calculate_pythagorean(1,1,1);
     }
     return 0;
 
