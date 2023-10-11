@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <string.h>
 
@@ -6,8 +7,26 @@
 #define x_arg 2
 #define y_arg 3
 
+
 double calculate_vector(double x, double y){
     return (sqrt(pow(x, 2) + pow(y, 2)));
+}
+
+float calculate_interest(int mode, float time, float capital, float percent) {
+    switch (mode)
+    {
+
+    case 0:
+        printf("%f", capital * (percent / 100) * time);
+        break;
+
+    case 1:
+        printf("%f", capital * pow(1 + (percent / 100), time));
+        break;
+
+    }
+    
+   
 }
 
 double calculate_pythagorean(){
@@ -55,8 +74,19 @@ int main(int argc, char *argv[])
     const char **args = (const char **)argv;
     
 
-    const char *opt[] = {"-v", "-p", "-vs", "-h"};
-    const char *opt_desc[] = {"Calculate vector magnitude given x and y.", "Pythagorean theorem.", "Sum of vectors given two vectors in x1 y1 x2 y2 format.", "Shows this message."};
+    const char *opt[] = {
+        "-v", 
+        "-p", 
+        "-vs", 
+        "-h", 
+        "-si" 
+    };
+    const char *opt_desc[] = {
+        "Calculate vector magnitude given x and y.", 
+        "Pythagorean theorem.", "Sum of vectors given two vectors in x1 y1 x2 y2 format.", 
+        "Shows this message.", 
+        "Calculates gain in simple interest."
+    };
     int opt_list_len = sizeof(opt) / sizeof(opt[1]);
 
     if (args[1] == NULL || strcmp(opt[3], args[1]) == 0){
@@ -80,6 +110,7 @@ int main(int argc, char *argv[])
     else if(strcmp(opt[1], args[mode_arg]) == 0){
         calculate_pythagorean();
     }
+
     else if (strcmp(opt[2], args[mode_arg]) == 0)
     {
         if (argv[x_arg] == NULL || argv[y_arg] == NULL)
@@ -88,6 +119,12 @@ int main(int argc, char *argv[])
             return 1;
         }
         printf("The sum of vectors (%2.6f, %2.6f) and (%2.6f, %2.6f) magnitude is: %f",atof(args[x_arg]), atof(args[x_arg + 2]), atof(args[y_arg]), atof(args[y_arg + 2]), calculate_vector(atof(args[x_arg + 2]) + atof(args[x_arg]), atof(args[y_arg + 2]) + atof(args[y_arg])));
+    }
+    else if (strcmp(opt[4], args[mode_arg])) {
+        int mode;
+        printf("Choose the mode, (1) Simple, (2) Compound");
+        scanf("%i", &mode);
+        calculate_interest(mode, atof(args[x_arg]), atof(args[y_arg]), atof(args[y_arg + 1]));
     }
     return 0;
 
