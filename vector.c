@@ -13,12 +13,22 @@ double calculate_vector(double x, double y){
 double calculate_pythagorean(){
 
     char choice[1];
-    printf("Select letter to solve for (a, b, c): ");
+    printf("Select letter to solve for (h)eight, (w)idth, hypo(t)enuse): ");
     scanf("%s", &choice);
-    const char *choices[] = {"a", "b", "c"};
-    if (strcmp(choice, choices[0]) == 0)
+    const char *choices[] = {"h", "w", "t"};
+    float height;
+    float width;
+    float hypotenuse;
+    if (strcmp(choice, choices[2]) == 0)
     {
-        //TODO Calculation
+        
+        printf("Input a number for height:");
+        scanf("%d", &height);
+        printf("Input a number for width:");
+        scanf("%d", &width);
+
+        printf("The hypotenuse is: %d", pow(height, 2));
+
     }
 }
     
