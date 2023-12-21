@@ -31,7 +31,7 @@ float calculate_interest(int mode, float time, float capital, float percent) {
 
 double calculate_pythagorean(){
 
-    char choice[1];
+    char choice[2];
     printf("Select letter to solve for (c)athetus, hypo(t)enuse): ");
     scanf("%s", &choice);
     const char *choices[] = {"c", "t"};
@@ -83,7 +83,8 @@ int main(int argc, char *argv[])
     };
     const char *opt_desc[] = {
         "Calculate vector magnitude given x and y.", 
-        "Pythagorean theorem.", "Sum of vectors given two vectors in x1 y1 x2 y2 format.", 
+        "Pythagorean theorem.", 
+        "Sum of vectors given two vectors in x1 y1 x2 y2 format.", 
         "Shows this message.", 
         "Calculates gain in simple interest."
     };
