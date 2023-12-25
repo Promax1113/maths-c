@@ -24,7 +24,7 @@ void sinp(const char message[], T& saveLoc){
     saveLoc = std::stoi(stemp);
   }
   else{
-    std::cerr << "invalid type!";
+     throw std::runtime_error("Invalid var-type passed!");
   }
 
 
@@ -37,6 +37,7 @@ double calculateVector(float x, float y){
 double simpleInterest(float bal, double perc, float yrs){
   return bal * perc * yrs;
 }
+
 double calculatePythagorean(){
   std::string stemp;
   int _choice;
@@ -52,7 +53,13 @@ double calculatePythagorean(){
     res = sqrt(pow(ccath, 2) + pow(hypot, 2));
     return res;
   }
-  return -1;
+  else if (_choice == 2){
+    sinp("Select a number for one cathetus: ", ccath);
+    sinp("select another number for the other cathetus: ", bcath);
+    res = sqrt(pow(ccath, 2) + pow(bcath, 2));
+    return res;
+  }
+  throw std::runtime_error("Invalid choice!!");
 
 }
 
@@ -68,19 +75,16 @@ int main(int argc, char *argv[]) {
     "-h",
     "-v", 
     "-p", 
-    "-vs", 
     "-si"
   };
   std::vector<std::string> optDesc{
         "Shows this message.", 
         "Calculate vector magnitude given x and y.", 
         "Pythagorean theorem.", 
-        "Sum of vectors given two vectors in x1 y1 x2 y2 format.", 
         "Calculates gain in simple interest."
     };
   std::string choice;
   double result;
-  std::string stemp;
 
   if (argc == 1 || std::string(argv[1]) == opt[0]){
     std::cout << "Available args: \n";
@@ -90,34 +94,32 @@ int main(int argc, char *argv[]) {
   // This checks if the arg provided is in the args list.
   std::vector<std::string>::iterator item = std::find(opt.begin(), opt.end(), argv[1]);
   if (item != opt.end()) {
-      choice = argv[std::distance(opt.begin(), item)];
+      choice = opt[std::distance(opt.begin(), item)];
   }
   else {
     std::cout << "Invalid argument!\n";
     printArgs(opt, optDesc);
     exit(0);
   }
-
-  std::cout << choice << " " << opt[2];
-  
   // Now any arg provided must be in the args option
   if (choice == opt[1]){
     if (argc < 3){std::cout << "Invalid args!" << "\n"; exit(0);}
-    result = calculateVector(std::stof(argv[2]), std::stof(argv[3]));
+    std::cout << "That vector is equal to " << calculateVector(std::stof(argv[2]), std::stof(argv[3])) << "\n";
   }
   else if (choice == opt[2]){
-    result = calculatePythagorean();
+    std::cout << "The result to that operation is " << calculatePythagorean() << "\n";
   }
-  else if (choice == opt[4]) {
+  else if (choice == opt[3]) {
     float _bal;
     double _perc;
     float _yrs;
     sinp("Input your balance: ", _bal);
-    sinp("Input your percentage: : ", _perc);
+    sinp("Input your percentage: ", _perc);
     sinp("Input the years: ", _yrs);
-    result = simpleInterest(_bal, _perc, _yrs);
+    std::cout << "The resultant interest is " << simpleInterest(_bal, _perc, _yrs) << "€\n";
   }
-  std::cout << "The result to that calculation is " << result << "\n";
+  
+
 
   return 0;
 }
